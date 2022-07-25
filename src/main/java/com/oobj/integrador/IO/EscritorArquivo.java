@@ -1,13 +1,17 @@
 package com.oobj.integrador.IO;
 
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import static com.oobj.integrador.IO.LeitorArquivo.leArquivoEntrada;
+
 public class EscritorArquivo {
 
-    public static void  escreveArquivo(String entrada, String nomeArquivo) throws IOException {
+    public static void escreveArquivoEntrada(String entrada, String nomeArquivo) throws IOException, NamingException, JMSException {
 
         Scanner scanner = new Scanner(entrada);
         OutputStream arquivo = new FileOutputStream(nomeArquivo);
@@ -19,11 +23,15 @@ public class EscritorArquivo {
             bufferedWriter.write(linha);
             bufferedWriter.newLine();
         }
+
+        leArquivoEntrada(nomeArquivo);
     }
 
-    public static void escreveArquivoProcessado(String nomeArquivoEntrada, String nomeArquivoProcessado) throws IOException {
+    public static void escreveArquivoProcessado(String nomeArquivo) throws IOException {
 
-        Scanner scanner = new Scanner(new File(nomeArquivoEntrada));
+        String nomeArquivoProcessado = "Processados\\" + nomeArquivo.substring(8, 43);
+
+        Scanner scanner = new Scanner(new File(nomeArquivo));
         OutputStream arquivoEntrada = new FileOutputStream(nomeArquivoProcessado);
         Writer escritorArquivo = new OutputStreamWriter(arquivoEntrada);
         BufferedWriter bufferedWriter = new BufferedWriter(escritorArquivo);
@@ -43,14 +51,6 @@ public class EscritorArquivo {
         String nomeArquivo = "Entrada\\pre-impressao-" + dataTexto + ".txt";
 
         return nomeArquivo;
-    }
-
-    public static String nomearArquivoProcessado(String nomeArquivo){
-
-        String dataTexto = nomeArquivo.substring(22, 39);
-        String nome = "Processados\\pre-processamento-" + dataTexto + ".txt";
-
-        return nome;
     }
 
     public static String nomearArquivoImpresso(){

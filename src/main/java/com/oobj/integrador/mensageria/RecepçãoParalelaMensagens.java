@@ -11,6 +11,14 @@ import static com.oobj.integrador.IO.EscritorArquivo.*;
 
 public class RecepçãoParalelaMensagens implements Runnable{
 
+    private BufferedWriter bufferedWriter;
+
+    public RecepçãoParalelaMensagens(BufferedWriter bufferedWriter) {
+        this.bufferedWriter = bufferedWriter;
+    }
+
+    public RecepçãoParalelaMensagens() {
+    }
 
     @Override
     public void run() {
@@ -33,11 +41,6 @@ public class RecepçãoParalelaMensagens implements Runnable{
             consumer = session.createConsumer(fila);
 
             consumer.setMessageListener(new MessageListener(){
-
-                String nomeArquivo = nomearArquivoImpresso();
-                OutputStream arquivo = new FileOutputStream(nomeArquivo);
-                Writer escritorArquivo = new OutputStreamWriter(arquivo);
-                BufferedWriter bufferedWriter = new BufferedWriter(escritorArquivo);
 
                 @Override
                 public void onMessage(Message message){
