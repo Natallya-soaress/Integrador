@@ -5,13 +5,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-public class EscritorArquivoEntrada {
+public class EscritorArquivo {
 
-    public static void escreveArquivoEntrada(String entrada, String nomeArquivo) throws IOException {
+    public static void  escreveArquivo(String entrada, String nomeArquivo) throws IOException {
 
         Scanner scanner = new Scanner(entrada);
-        OutputStream arquivoEntrada = new FileOutputStream(nomeArquivo);
-        Writer escritorArquivo = new OutputStreamWriter(arquivoEntrada);
+        OutputStream arquivo = new FileOutputStream(nomeArquivo);
+        Writer escritorArquivo = new OutputStreamWriter(arquivo);
         BufferedWriter bufferedWriter = new BufferedWriter(escritorArquivo);
 
         while(scanner.hasNextLine()){
@@ -51,6 +51,16 @@ public class EscritorArquivoEntrada {
         String nome = "Processados\\pre-processamento-" + dataTexto + ".txt";
 
         return nome;
+    }
+
+    public static String nomearArquivoImpresso(){
+
+        LocalDateTime data = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        String dataTexto = data.format(formatter);
+        String nomeArquivo = "Saida\\pre-impressao -" + dataTexto + "-retorno.txt";
+
+        return nomeArquivo;
     }
 
 }

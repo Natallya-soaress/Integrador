@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.oobj.integrador.IO.EscritorArquivoEntrada.escreveArquivoProcessado;
-import static com.oobj.integrador.IO.EscritorArquivoEntrada.nomearArquivoProcessado;
+import static com.oobj.integrador.IO.EscritorArquivo.escreveArquivoProcessado;
+import static com.oobj.integrador.IO.EscritorArquivo.nomearArquivoProcessado;
 
-public class LeitorArquivoEntrada {
+public class LeitorArquivo {
 
     public static List<String> leArquivoEntrada(String nomeArquivo) throws IOException {
 

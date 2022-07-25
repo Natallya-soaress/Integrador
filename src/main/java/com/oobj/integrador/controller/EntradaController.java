@@ -12,11 +12,10 @@ import javax.naming.NamingException;
 import java.io.*;
 import java.util.List;
 
-import static com.oobj.integrador.IO.EscritorArquivoEntrada.escreveArquivoEntrada;
-import static com.oobj.integrador.IO.EscritorArquivoEntrada.nomearArquivoEntrada;
-import static com.oobj.integrador.IO.LeitorArquivoEntrada.leArquivoEntrada;
+import static com.oobj.integrador.IO.EscritorArquivo.escreveArquivo;
+import static com.oobj.integrador.IO.EscritorArquivo.nomearArquivoEntrada;
+import static com.oobj.integrador.IO.LeitorArquivo.leArquivoEntrada;
 import static com.oobj.integrador.mensageria.EmissorMensagem.enviaMensagensPreImpressao;
-import static com.oobj.integrador.mensageria.RecptorMensagem.recebeMensagensProcessadas;
 
 
 @RequestMapping("api")
@@ -27,10 +26,9 @@ public class EntradaController {
     public ResponseEntity<String> recebeRequisição(@RequestBody String entrada) throws IOException, NamingException, JMSException {
 
         String nomeArquivo = nomearArquivoEntrada();
-        escreveArquivoEntrada(entrada, nomeArquivo);
+        escreveArquivo(entrada, nomeArquivo);
         List<String> mensagens = leArquivoEntrada(nomeArquivo);
         enviaMensagensPreImpressao(mensagens);
-        recebeMensagensProcessadas();
 
         return new ResponseEntity<String>("preImpressaoSolicitada : true", HttpStatus.OK);
     }
