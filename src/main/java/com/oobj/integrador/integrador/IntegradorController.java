@@ -1,4 +1,4 @@
-package com.oobj.integrador.controller;
+package com.oobj.integrador.integrador;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,20 +11,21 @@ import javax.jms.JMSException;
 import javax.naming.NamingException;
 import java.io.*;
 
-import static com.oobj.integrador.IO.EscritorArquivo.escreveArquivoEntrada;
-import static com.oobj.integrador.IO.EscritorArquivo.nomearArquivoEntrada;
+import static com.oobj.integrador.enfileirador.EscritorArquivo.escreveArquivoEntrada;
+import static com.oobj.integrador.enfileirador.EscritorArquivo.nomearArquivoEntrada;
 
 
 @RequestMapping("api")
 @RestController
-public class EntradaController {
+public class IntegradorController {
 
     @PostMapping("/pre-impressao")
     public ResponseEntity<String> recebeRequisição(@RequestBody String entrada) throws IOException, NamingException, JMSException {
 
-        escreveArquivoEntrada(entrada, nomearArquivoEntrada());
+        String nomeArquivo = nomearArquivoEntrada();
+        escreveArquivoEntrada(entrada, nomeArquivo);
 
-        return new ResponseEntity<String>("preImpressaoSolicitada : true", HttpStatus.OK);
+        return new ResponseEntity<String>("\"preImpressaoSolicitada\" : true", HttpStatus.OK);
     }
 
 }

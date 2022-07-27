@@ -1,4 +1,4 @@
-package com.oobj.integrador.mensageria;
+package com.oobj.integrador.configuraçao;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;

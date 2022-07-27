@@ -1,15 +1,12 @@
-package com.oobj.integrador.mensageria;
+package com.oobj.integrador.Broker;
 
 
 import javax.jms.*;
-import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.List;
-import java.util.Properties;
 
 public class EmissorMensagem {
-
 
     public static void enviaMensagensPreImpressao(List<String> mensagens) throws NamingException, JMSException {
 

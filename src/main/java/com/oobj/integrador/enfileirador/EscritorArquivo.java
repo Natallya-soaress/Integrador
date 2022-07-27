@@ -1,4 +1,4 @@
-package com.oobj.integrador.IO;
+package com.oobj.integrador.enfileirador;
 
 import javax.jms.JMSException;
 import javax.naming.NamingException;
@@ -8,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.oobj.integrador.IO.LeitorArquivo.leArquivoEntrada;
+import static com.oobj.integrador.enfileirador.LeitorArquivo.leArquivoEntrada;
+
 
 public class EscritorArquivo {
 
@@ -24,6 +25,7 @@ public class EscritorArquivo {
             bufferedWriter.write(linha);
             bufferedWriter.newLine();
         }
+
         scanner.close();
         bufferedWriter.close();
 
@@ -47,9 +49,6 @@ public class EscritorArquivo {
 
         scanner.close();
         bufferedWriter.close();
-
-        File file = new File(nomeArquivo);
-        file.delete();
     }
 
     public static String nomearArquivoEntrada(){
@@ -64,10 +63,13 @@ public class EscritorArquivo {
 
     public static String nomearArquivoImpresso(){
 
-        LocalDateTime data = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-        String dataTexto = data.format(formatter);
-        String nomeArquivo = "Saida\\pre-impressao -" + dataTexto + "-retorno.txt";
+        File file = new File("Processados");
+        File[] arquivos = file.listFiles();
+
+        String nome = arquivos[arquivos.length - 1].getName();
+        String data = nome.substring(14, 31);
+
+        String nomeArquivo = "Saida\\pre-impressao-" + data + "-retorno.txt";
 
         return nomeArquivo;
     }
@@ -79,9 +81,7 @@ public class EscritorArquivo {
         for (String msg : mensagens) {
             bufferedWriter.write(msg);
             bufferedWriter.newLine();
-            System.out.println(msg);
         }
-
         bufferedWriter.close();
     }
 

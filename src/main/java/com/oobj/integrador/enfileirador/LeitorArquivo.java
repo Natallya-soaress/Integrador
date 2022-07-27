@@ -1,20 +1,19 @@
-package com.oobj.integrador.IO;
-
-import com.oobj.integrador.mensageria.EmissorMensagem;
+package com.oobj.integrador.enfileirador;
 
 import javax.jms.JMSException;
 import javax.naming.NamingException;
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.oobj.integrador.IO.EscritorArquivo.escreveArquivoProcessado;
-import static com.oobj.integrador.mensageria.EmissorMensagem.enviaMensagensPreImpressao;
+import static com.oobj.integrador.enfileirador.EscritorArquivo.escreveArquivoProcessado;
+import static com.oobj.integrador.Broker.EmissorMensagem.enviaMensagensPreImpressao;
 
 public class LeitorArquivo {
 
-    public static List<String> leArquivoEntrada(String nomeArquivo) throws IOException, NamingException, JMSException {
+    public static void leArquivoEntrada(String nomeArquivo) throws IOException, NamingException, JMSException {
 
         List<String> mensagens = new ArrayList<>();
         String mensagem = "";
@@ -35,7 +34,5 @@ public class LeitorArquivo {
 
         escreveArquivoProcessado(nomeArquivo);
         enviaMensagensPreImpressao(mensagens);
-
-        return mensagens;
     }
 }
