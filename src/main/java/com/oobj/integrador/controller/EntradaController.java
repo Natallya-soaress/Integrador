@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.jms.JMSException;
 import javax.naming.NamingException;
 import java.io.*;
-import java.util.List;
 
 import static com.oobj.integrador.IO.EscritorArquivo.escreveArquivoEntrada;
 import static com.oobj.integrador.IO.EscritorArquivo.nomearArquivoEntrada;
-import static com.oobj.integrador.IO.LeitorArquivo.leArquivoEntrada;
-import static com.oobj.integrador.mensageria.EmissorMensagem.enviaMensagensPreImpressao;
 
 
 @RequestMapping("api")

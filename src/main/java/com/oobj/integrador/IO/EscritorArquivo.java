@@ -5,6 +5,7 @@ import javax.naming.NamingException;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.oobj.integrador.IO.LeitorArquivo.leArquivoEntrada;
@@ -23,6 +24,8 @@ public class EscritorArquivo {
             bufferedWriter.write(linha);
             bufferedWriter.newLine();
         }
+        scanner.close();
+        bufferedWriter.close();
 
         leArquivoEntrada(nomeArquivo);
     }
@@ -41,6 +44,12 @@ public class EscritorArquivo {
             bufferedWriter.write(linha);
             bufferedWriter.newLine();
         }
+
+        scanner.close();
+        bufferedWriter.close();
+
+        File file = new File(nomeArquivo);
+        file.delete();
     }
 
     public static String nomearArquivoEntrada(){
@@ -61,6 +70,19 @@ public class EscritorArquivo {
         String nomeArquivo = "Saida\\pre-impressao -" + dataTexto + "-retorno.txt";
 
         return nomeArquivo;
+    }
+
+    public static void escreveArquivoImpresso(List<String> mensagens) throws IOException {
+
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(nomearArquivoImpresso()));
+
+        for (String msg : mensagens) {
+            bufferedWriter.write(msg);
+            bufferedWriter.newLine();
+            System.out.println(msg);
+        }
+
+        bufferedWriter.close();
     }
 
 }

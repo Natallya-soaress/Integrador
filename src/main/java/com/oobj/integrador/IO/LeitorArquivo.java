@@ -1,5 +1,7 @@
 package com.oobj.integrador.IO;
 
+import com.oobj.integrador.mensageria.EmissorMensagem;
+
 import javax.jms.JMSException;
 import javax.naming.NamingException;
 import java.io.*;

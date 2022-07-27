@@ -10,13 +10,10 @@ import java.util.Properties;
 
 public class EmissorMensagem {
 
+
     public static void enviaMensagensPreImpressao(List<String> mensagens) throws NamingException, JMSException {
 
-        Properties props = new Properties();
-        props.setProperty(Context.INITIAL_CONTEXT_FACTORY,"org.apache.activemq.jndi.ActiveMQInitialContextFactory");
-        props.setProperty(Context.PROVIDER_URL,"tcp://localhost:61616");
-
-        InitialContext context = new InitialContext(props);
+        InitialContext context = new InitialContext();
         ConnectionFactory factory = (ConnectionFactory) context.lookup("ConnectionFactory");
 
         Connection connection = factory.createConnection();

@@ -14,7 +14,7 @@ import javax.jms.ConnectionFactory;
 
 @Configuration
 @EnableJms
-public class ActiveMQConfig {
+public class JmsConfig {
 
     @Value("${spring.activemq.broker-url}")
     private String brokerUrl;
@@ -27,7 +27,7 @@ public class ActiveMQConfig {
 
     @Bean
     public ActiveMQConnectionFactory connectionFactory() {
-        if ( "".equals(user) ) {
+        if ( "".equals(user)) {
             return new ActiveMQConnectionFactory(brokerUrl);
         }
         return new ActiveMQConnectionFactory(user, password, brokerUrl);
@@ -51,7 +51,7 @@ public class ActiveMQConfig {
     @Bean
     public JmsTemplate jmsTemplateTopic() {
         JmsTemplate jmsTemplate = new JmsTemplate(connectionFactory());
-        jmsTemplate.setPubSubDomain( true );
+        jmsTemplate.setPubSubDomain(true);
         return jmsTemplate;
     }
 }
