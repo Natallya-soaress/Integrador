@@ -2,6 +2,7 @@ package com.oobj.integrador.enfileirador;
 
 import javax.jms.JMSException;
 import javax.naming.NamingException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ public class LeitorArquivo {
                 stringBuffer.setLength(0);
             }
         }
-
         escreveArquivoProcessado(nomeArquivo);
         enviaMensagensPreImpressao(mensagens);
     }

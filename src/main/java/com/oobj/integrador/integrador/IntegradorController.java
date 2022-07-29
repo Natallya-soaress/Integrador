@@ -22,8 +22,7 @@ public class IntegradorController {
     @PostMapping("/pre-impressao")
     public ResponseEntity<String> recebeRequisição(@RequestBody String entrada) throws IOException, NamingException, JMSException {
 
-        String nomeArquivo = nomearArquivoEntrada();
-        escreveArquivoEntrada(entrada, nomeArquivo);
+        escreveArquivoEntrada(entrada, nomearArquivoEntrada());
 
         return new ResponseEntity<String>("\"preImpressaoSolicitada\" : true", HttpStatus.OK);
     }
