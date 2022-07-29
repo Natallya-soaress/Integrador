@@ -16,19 +16,19 @@ import static com.oobj.integrador.enfileirador.EscritorArquivo.escreveArquivoImp
 public class ReceptorMensagens implements MessageListener {
 
     private List<String> mensagens = new ArrayList<>();
-    private int quantidadeMensagens = 44;
 
     @JmsListener(destination="pre_impressao", concurrency="4")
     @Override
     public void onMessage(Message message) {
         try {
             String mensagem = ((TextMessage) message).getText();
-            String linha = trataMensagensImpressas(mensagem);
-            mensagens.add(linha);
 
-            if(mensagens.size() == quantidadeMensagens){
+            if(mensagem.equals("FIM")){
                 escreveArquivoImpresso(mensagens);
-                quantidadeMensagens += 44;
+                mensagens.clear();
+            } else {
+                String linha = trataMensagensImpressas(mensagem);
+                mensagens.add(linha);
             }
 
         } catch (Exception e) {

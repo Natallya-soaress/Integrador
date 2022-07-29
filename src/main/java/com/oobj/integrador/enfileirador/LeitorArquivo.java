@@ -32,6 +32,7 @@ public class LeitorArquivo {
                 stringBuffer.setLength(0);
             }
         }
+        mensagens.add("FIM");
         escreveArquivoProcessado(nomeArquivo);
         enviaMensagensPreImpressao(mensagens);
     }
